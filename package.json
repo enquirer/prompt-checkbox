@@ -1,0 +1,54 @@
+{
+  "name": "enquirer-prompt-checkbox",
+  "description": "Checkbox prompt plugin for Enquirer.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jonschlinkert/enquirer-prompt-checkbox",
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "repository": "jonschlinkert/enquirer-prompt-checkbox",
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/enquirer-prompt-checkbox/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "LICENSE"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "answer",
+    "answers",
+    "ask",
+    "checkbox",
+    "choice",
+    "cli",
+    "command",
+    "enquirerprompt",
+    "input",
+    "inquire",
+    "inquirer",
+    "interact",
+    "list",
+    "menu",
+    "password",
+    "prompt",
+    "prompts",
+    "question",
+    "readline",
+    "stdin",
+    "stdout",
+    "terminal",
+    "tty",
+    "ui"
+  ],
+  "dependencies": {
+    "cli-cursor": "^1.0.2",
+    "log-utils": "^0.2.1",
+    "radio-symbol": "^0.1.1"
+  }
+}
