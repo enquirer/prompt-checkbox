@@ -1,7 +1,7 @@
 {
   "name": "enquirer-prompt-checkbox",
   "description": "Adds checkbox prompt support to Enquirer.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/enquirer/enquirer-prompt-checkbox",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "enquirer/enquirer-prompt-checkbox",
@@ -29,7 +29,7 @@
     "terminal-paginator": "^0.1.0"
   },
   "devDependencies": {
-    "enquirer": "^0.1.1",
+    "enquirer": "^0.1.2",
     "gulp-format-md": "^0.1.10"
   },
   "keywords": [
@@ -61,23 +61,27 @@
   ],
   "verb": {
     "toc": false,
-    "layout": "default",
+    "layout": "common-minimal",
     "tasks": [
       "readme"
     ],
     "plugins": [
       "gulp-format-md"
     ],
-    "lint": {
-      "reflinks": true
-    },
     "related": {
-      "list": []
+      "list": [
+        "enquirer",
+        "enquirer-prompt",
+        "enquirer-question"
+      ]
     },
     "reflinks": [
       "enquirer",
       "verb",
       "verb-generate-readme"
-    ]
+    ],
+    "lint": {
+      "reflinks": true
+    }
   }
 }
