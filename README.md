@@ -1,6 +1,6 @@
 # enquirer-prompt-checkbox [![NPM version](https://img.shields.io/npm/v/enquirer-prompt-checkbox.svg?style=flat)](https://www.npmjs.com/package/enquirer-prompt-checkbox) [![NPM downloads](https://img.shields.io/npm/dm/enquirer-prompt-checkbox.svg?style=flat)](https://npmjs.org/package/enquirer-prompt-checkbox)
 
-Adds checkbox prompt support to Enquirer.
+> Adds multiple-choice/checkbox prompt support to Enquirer.
 
 ![checkbox prompt example](https://raw.githubusercontent.com/enquirer/enquirer-prompt-checkbox/master/example.gif)
 
