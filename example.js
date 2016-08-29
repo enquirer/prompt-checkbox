@@ -2,13 +2,16 @@ var Enquirer = require('enquirer');
 var enquirer = new Enquirer();
 
 enquirer.register('checkbox', require('./'));
-enquirer.question('color', 'What is your favorite color?', {
-  default: 'blue',
+enquirer.question('colors', 'What are your favorite colors?', {
   type: 'checkbox',
-  choices: ['red', 'yellow', 'blue']
+  choices: [
+    'red',
+    'blue',
+    'yellow'
+  ]
 });
 
-enquirer.ask('color')
+enquirer.ask('colors')
   .then(function(answers) {
     console.log(answers)
   })
