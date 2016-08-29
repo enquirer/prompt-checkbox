@@ -1,17 +1,18 @@
 {
   "name": "enquirer-prompt-checkbox",
-  "description": "Checkbox prompt plugin for Enquirer.",
+  "description": "Adds checkbox prompt support to Enquirer.",
   "version": "0.1.0",
-  "homepage": "https://github.com/jonschlinkert/enquirer-prompt-checkbox",
+  "homepage": "https://github.com/enquirer/enquirer-prompt-checkbox",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
-  "repository": "jonschlinkert/enquirer-prompt-checkbox",
+  "repository": "enquirer/enquirer-prompt-checkbox",
   "bugs": {
-    "url": "https://github.com/jonschlinkert/enquirer-prompt-checkbox/issues"
+    "url": "https://github.com/enquirer/enquirer-prompt-checkbox/issues"
   },
   "license": "MIT",
   "files": [
     "index.js",
-    "LICENSE"
+    "LICENSE",
+    "README.md"
   ],
   "main": "index.js",
   "engines": {
@@ -19,6 +20,17 @@
   },
   "scripts": {
     "test": "mocha"
+  },
+  "dependencies": {
+    "cli-cursor": "^1.0.2",
+    "enquirer-prompt": "^0.1.0",
+    "log-utils": "^0.2.1",
+    "radio-symbol": "^0.1.1",
+    "terminal-paginator": "^0.1.0"
+  },
+  "devDependencies": {
+    "enquirer": "^0.1.1",
+    "gulp-format-md": "^0.1.10"
   },
   "keywords": [
     "answer",
@@ -28,6 +40,7 @@
     "choice",
     "cli",
     "command",
+    "enquirer",
     "enquirerprompt",
     "input",
     "inquire",
@@ -46,9 +59,25 @@
     "tty",
     "ui"
   ],
-  "dependencies": {
-    "cli-cursor": "^1.0.2",
-    "log-utils": "^0.2.1",
-    "radio-symbol": "^0.1.1"
+  "verb": {
+    "toc": false,
+    "layout": "default",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "lint": {
+      "reflinks": true
+    },
+    "related": {
+      "list": []
+    },
+    "reflinks": [
+      "enquirer",
+      "verb",
+      "verb-generate-readme"
+    ]
   }
 }
