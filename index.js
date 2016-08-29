@@ -112,9 +112,10 @@ Checkbox.prototype.onDownKey = function() {
   this.render();
 };
 
-Checkbox.prototype.onNumberKey = function(input) {
-  if (input <= this.question.choices.realLength) {
-    this.pointer = input - 1;
+Checkbox.prototype.onNumberKey = function(event) {
+  var num = Number(event.value);
+  if (num <= this.question.choices.realLength) {
+    this.pointer = num - 1;
     this.toggleChoice(this.pointer);
   }
   this.render();
