@@ -23,14 +23,15 @@
   },
   "dependencies": {
     "cli-cursor": "^1.0.2",
-    "enquirer-prompt": "^0.1.0",
     "log-utils": "^0.2.1",
-    "radio-symbol": "^0.1.1",
+    "prompt-base": "^0.3.2",
+    "radio-symbol": "^0.1.2",
     "terminal-paginator": "^0.1.0"
   },
   "devDependencies": {
-    "enquirer": "^0.1.2",
-    "gulp-format-md": "^0.1.10"
+    "enquirer": "^0.1.5",
+    "gulp-format-md": "^0.1.10",
+    "prompt-question": "^0.3.0"
   },
   "keywords": [
     "answer",
