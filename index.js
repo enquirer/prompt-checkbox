@@ -16,7 +16,8 @@ function Checkbox(/*question, answers, rl*/) {
   if (!this.question.choices) {
     throw new Error('expected "options.choices" to be an array');
   }
-  this.pointer = ~this.setDefault();
+  this.setDefault();
+  this.pointer = 0;
   this.question.default = null;
   this.paginator = new Paginator();
 }
@@ -138,7 +139,7 @@ Checkbox.prototype.onNumberKey = function(event) {
 
 Checkbox.prototype.onSpaceKey = function() {
   this.spaceKeyPressed = true;
-  this.choices.toggleChoice(this.pointer);
+  this.choices.choices.toggleChoice(this.pointer);
   this.render();
 };
 
