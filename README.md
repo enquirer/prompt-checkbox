@@ -4,6 +4,14 @@
 
 ![checkbox prompt example](https://raw.githubusercontent.com/enquirer/enquirer-prompt-checkbox/master/example.gif)
 
+## Install
+
+Install with [npm](https://www.npmjs.com/):
+
+```sh
+$ npm install --save enquirer-prompt-checkbox
+```
+
 ## Usage
 
 ```js
