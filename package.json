@@ -1,7 +1,7 @@
 {
   "name": "enquirer-prompt-checkbox",
   "description": "Adds multiple-choice/checkbox prompt support to Enquirer.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/enquirer/enquirer-prompt-checkbox",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "enquirer/enquirer-prompt-checkbox",
