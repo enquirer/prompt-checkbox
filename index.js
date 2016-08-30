@@ -139,7 +139,7 @@ Checkbox.prototype.onNumberKey = function(event) {
 
 Checkbox.prototype.onSpaceKey = function() {
   this.spaceKeyPressed = true;
-  this.choices.choices.toggleChoice(this.pointer);
+  this.question.choices.toggleChoice(this.pointer);
   this.render();
 };
 
