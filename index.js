@@ -151,9 +151,7 @@ Checkbox.prototype.setDefault = function() {
   if (this.question.hasDefault) {
     var idx = this.question.choices.getIndex(this.question.default);
     this.question.choices.enable(idx);
-    return idx;
   }
-  return -1;
 };
 
 /**
