@@ -64,6 +64,10 @@ enquirer.ask(questions)
   });
 ```
 
+## Attribution
+
+Based on the `checkbox` prompt in inquirer.
+
 ## About
 
 ### Related projects
