@@ -39,11 +39,15 @@ Checkbox.prototype.ask = function(cb) {
   this.ui.once('error', this.onError.bind(this));
   this.ui.on('line', this.onSubmit.bind(this));
   this.ui.on('keypress', function(event) {
-    this.move(event.key.name, event);
-    if (event.key.name === 'space') {
-      this.spaceKeyPressed = true;
-      this.render();
+    if (event.key.name === 'number') {
+      this.onNumberKey(event);
+      return;
     }
+    if (event.key.name === 'space') {
+      this.onSpaceKey();
+      return;
+    }
+    this.move(event.key.name, event);
   }.bind(this));
 
   // Initialize prompt
@@ -75,6 +79,28 @@ Checkbox.prototype.render = function(state) {
   }
 
   this.ui.render(message, append);
+};
+
+/**
+ * When user presses the `space` bar
+ */
+
+Checkbox.prototype.onSpaceKey = function() {
+  this.spaceKeyPressed = true;
+  this.choices.enable(this.position);
+  this.render();
+};
+
+/**
+ * When user presses a number key
+ */
+
+Checkbox.prototype.onNumberKey = function(event) {
+  var num = Number(event.value);
+  if (num <= this.choices.length) {
+    this.position = num - 1;
+  }
+  this.render();
 };
 
 /**
