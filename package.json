@@ -1,18 +1,16 @@
 {
-  "name": "enquirer-prompt-checkbox",
-  "description": "Adds multiple-choice/checkbox prompt support to Enquirer.",
+  "name": "prompt-checkbox",
+  "description": "Multiple-choice/checkbox prompt. Can be used standalone or with a prompt system like [Enquirer].",
   "version": "0.2.1",
-  "homepage": "https://github.com/enquirer/enquirer-prompt-checkbox",
+  "homepage": "https://github.com/enquirer/prompt-checkbox",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
-  "repository": "enquirer/enquirer-prompt-checkbox",
+  "repository": "enquirer/prompt-checkbox",
   "bugs": {
-    "url": "https://github.com/enquirer/enquirer-prompt-checkbox/issues"
+    "url": "https://github.com/enquirer/prompt-checkbox/issues"
   },
   "license": "MIT",
   "files": [
-    "index.js",
-    "LICENSE",
-    "README.md"
+    "index.js"
   ],
   "main": "index.js",
   "engines": {
@@ -23,15 +21,15 @@
   },
   "dependencies": {
     "cli-cursor": "^1.0.2",
+    "debug": "^2.2.0",
     "log-utils": "^0.2.1",
-    "prompt-base": "^0.3.2",
-    "radio-symbol": "^0.1.2",
-    "terminal-paginator": "^0.1.0"
+    "prompt-base": "^0.5.0"
   },
   "devDependencies": {
-    "enquirer": "^0.1.5",
+    "enquirer": "^0.3.0",
     "gulp-format-md": "^0.1.10",
-    "prompt-question": "^0.3.0"
+    "prompt-question": "^0.3.1",
+    "radio-symbol": "^0.2.1"
   },
   "keywords": [
     "answer",
