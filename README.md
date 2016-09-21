@@ -1,15 +1,15 @@
-# enquirer-prompt-checkbox [![NPM version](https://img.shields.io/npm/v/enquirer-prompt-checkbox.svg?style=flat)](https://www.npmjs.com/package/enquirer-prompt-checkbox) [![NPM downloads](https://img.shields.io/npm/dm/enquirer-prompt-checkbox.svg?style=flat)](https://npmjs.org/package/enquirer-prompt-checkbox)
+# prompt-checkbox [![NPM version](https://img.shields.io/npm/v/prompt-checkbox.svg?style=flat)](https://www.npmjs.com/package/prompt-checkbox) [![NPM downloads](https://img.shields.io/npm/dm/prompt-checkbox.svg?style=flat)](https://npmjs.org/package/prompt-checkbox)
 
 > Adds multiple-choice/checkbox prompt support to Enquirer.
 
-![checkbox prompt example](https://raw.githubusercontent.com/enquirer/enquirer-prompt-checkbox/master/example.gif)
+![checkbox prompt example](https://raw.githubusercontent.com/enquirer/prompt-checkbox/master/example.gif)
 
 ## Install
 
 Install with [npm](https://www.npmjs.com/):
 
 ```sh
-$ npm install --save enquirer-prompt-checkbox
+$ npm install --save prompt-checkbox
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ $ npm install --save enquirer-prompt-checkbox
 var Enquirer = require('enquirer');
 var enquirer = new Enquirer();
 
-enquirer.register('checkbox', require('enquirer-prompt-checkbox'));
+enquirer.register('checkbox', require('prompt-checkbox'));
 ```
 
 ## Example
@@ -33,7 +33,7 @@ Functional style questions.
 var Enquirer = require('enquirer');
 var enquirer = new Enquirer();
 
-enquirer.register('checkbox', require('enquirer-prompt-checkbox'));
+enquirer.register('checkbox', require('prompt-checkbox'));
 enquirer.question('color', 'What is your favorite color?', {
   type: 'checkbox',
   default: 'blue',
@@ -54,7 +54,7 @@ Declarative questions format.
 var Enquirer = require('enquirer');
 var enquirer = new Enquirer();
 
-enquirer.register('checkbox', require('enquirer-prompt-checkbox'));
+enquirer.register('checkbox', require('prompt-checkbox'));
 
 var questions = [
   {
@@ -106,7 +106,7 @@ $ npm install -d && npm test
 ### License
 
 Copyright © 2016, [Jon Schlinkert](https://github.com/jonschlinkert).
-Released under the [MIT license](https://github.com/enquirer/enquirer-prompt-checkbox/blob/master/LICENSE).
+Released under the [MIT license](https://github.com/enquirer/prompt-checkbox/blob/master/LICENSE).
 
 ***
 
