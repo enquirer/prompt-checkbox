@@ -20,9 +20,33 @@ enquirer.register('checkbox', require('prompt-checkbox'));
 
 ## Example
 
+```js
+var Question = require('prompt-question');
+var Prompt = require('prompt-checkbox');
+var question = new Question('colors', 'What are your favorite colors?', {
+  type: 'checkbox',
+  choices: [
+    'red',
+    'blue',
+    'yellow'
+  ]
+});
+
+var prompt = new Prompt(question);
+prompt.run()
+  .then(function(answers) {
+    console.log(answers)
+  })
+  .catch(function(err) {
+    console.log(err)
+  })
+```
+
+## Enquirer examples
+
 [Enquirer][] supports both the declarative inquirer-style question format and a functional format using the `.question` method:
 
-**.question**
+**Functional-style questions**
 
 Functional style questions.
 
