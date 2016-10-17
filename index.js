@@ -2,8 +2,8 @@
 
 var debug = require('debug')('prompt-checkbox');
 var Prompt = require('prompt-base');
-var cursor = require('cli-cursor');
-var log = require('log-utils');
+var cyan = require('ansi-cyan');
+var red = require('ansi-red');
 
 /**
  * Checkbox prompt
@@ -51,7 +51,7 @@ Checkbox.prototype.ask = function(cb) {
   }.bind(this));
 
   // Initialize prompt
-  cursor.hide();
+  hide();
   this.render();
   return this;
 };
@@ -62,7 +62,7 @@ Checkbox.prototype.ask = function(cb) {
 
 Checkbox.prototype.render = function(state) {
   var append = typeof state === 'string'
-    ? log.red('>> ') + state
+    ? red('>> ') + state
     : '';
 
   // render question
@@ -73,7 +73,7 @@ Checkbox.prototype.render = function(state) {
 
   // Render choices or answer depending on the state
   if (this.status === 'answered') {
-    message += log.cyan(this.checked.join(', '));
+    message += cyan(this.checked.join(', '));
   } else {
     message += this.choices.render(this.position, {paginate: true});
   }
@@ -110,9 +110,11 @@ Checkbox.prototype.onNumberKey = function(event) {
 Checkbox.prototype.onSubmit = function() {
   this.answer = this.getChecked();
   this.status = 'answered';
+
   this.on('answer', function() {
-    cursor.show();
+    show();
   });
+
   // removes listeners
   this.only();
   this.submitAnswer();
@@ -146,6 +148,18 @@ Checkbox.prototype.getChecked = function() {
   }
   return res;
 };
+
+/**
+ * Hide/show cursor
+ */
+
+function show() {
+  process.stdout.write('\u001b[?25h');
+}
+
+function hide() {
+  process.stdout.write('\u001b[?25l');
+}
 
 /**
  * Module exports
