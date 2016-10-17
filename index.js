@@ -37,8 +37,8 @@ Checkbox.prototype.ask = function(cb) {
   this.callback = cb;
 
   this.ui.once('error', this.onError.bind(this));
-  this.ui.on('line', this.onSubmit.bind(this));
-  this.ui.on('keypress', function(event) {
+  this.only('line', this.onSubmit.bind(this));
+  this.only('keypress', function(event) {
     if (event.key.name === 'number') {
       this.onNumberKey(event);
       return;
@@ -113,6 +113,8 @@ Checkbox.prototype.onSubmit = function() {
   this.on('answer', function() {
     cursor.show();
   });
+  // removes listeners
+  this.only();
   this.submitAnswer();
 };
 
