@@ -87,7 +87,7 @@ Checkbox.prototype.render = function(state) {
 
 Checkbox.prototype.onSpaceKey = function() {
   this.spaceKeyPressed = true;
-  this.choices.enable(this.position);
+  this.choices.toggle(this.position);
   this.render();
 };
 
