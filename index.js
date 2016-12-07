@@ -2,7 +2,6 @@
 
 var debug = require('debug')('prompt-checkbox');
 var Prompt = require('prompt-base');
-var cursor = require('cli-cursor');
 var log = require('log-utils');
 
 /**
@@ -15,10 +14,7 @@ function Checkbox(/*question, answers, ui*/) {
   if (!this.choices) {
     throw new TypeError('expected "options.choices" to be an object or array');
   }
-  this.checked = [];
-  this.position = 0;
-  this.setDefault();
-  this.question.default = null;
+  this.initCheckbox();
 }
 
 /**
@@ -26,6 +22,25 @@ function Checkbox(/*question, answers, ui*/) {
  */
 
 Prompt.extend(Checkbox);
+
+/**
+ * Set the default value to use
+ */
+
+Checkbox.prototype.initCheckbox = function() {
+  this.checked = [];
+  this.position = 0;
+
+  if (this.question.hasDefault) {
+    this.choices.enable(this.question.default);
+  }
+
+  this.question.default = null;
+  if (this.options.radio === true && !this.choices.getChoice('all')) {
+    var choices = ['all', 'none', this.choices.separator()].concat(this.choices.original);
+    this.choices = new this.question.Choices(choices);
+  }
+};
 
 /**
  * Start the prompt session
@@ -51,7 +66,7 @@ Checkbox.prototype.ask = function(cb) {
   }.bind(this));
 
   // Initialize prompt
-  cursor.hide();
+  hide();
   this.render();
   return this;
 };
@@ -82,7 +97,7 @@ Checkbox.prototype.render = function(state) {
 };
 
 /**
- * When user presses a number key
+ * Called when user hits a number key
  */
 
 Checkbox.prototype.onNumberKey = function(event) {
@@ -95,7 +110,7 @@ Checkbox.prototype.onNumberKey = function(event) {
 };
 
 /**
- * When user presses the `space` bar
+ * Called when user hits the `space` bar
  */
 
 Checkbox.prototype.onSpaceKey = function() {
@@ -105,13 +120,25 @@ Checkbox.prototype.onSpaceKey = function() {
 };
 
 /**
- * Set the default value to use
+ * When user press `enter` key
  */
 
-Checkbox.prototype.setDefault = function() {
-  if (this.question.hasDefault) {
-    this.choices.enable(this.question.default);
-  }
+Checkbox.prototype.onSubmit = function() {
+  this.answer = this.getSelected();
+  this.status = 'answered';
+  this.once('answer', show);
+
+  // removes listeners
+  this.only();
+  this.submitAnswer();
+};
+
+/**
+ * Get selected choices (can be overridden)
+ */
+
+Checkbox.prototype.getSelected = function() {
+  return this.choices.checked;
 };
 
 /**
@@ -136,25 +163,22 @@ Checkbox.prototype.radio = function() {
       this.choices.disable(['all', 'none']);
       this.choices.toggle(this.position);
     }
+  } else {
+    this.choices.toggle(this.position);
   }
 };
 
 /**
- * When user press `enter` key
+ * Hide/show cursor
  */
 
-Checkbox.prototype.onSubmit = function() {
-  this.answer = this.choices.checked;
-  this.status = 'answered';
+function show() {
+  process.stdout.write('\u001b[?25h');
+}
 
-  this.on('answer', function() {
-    cursor.show();
-  });
-
-  // removes listeners
-  this.only();
-  this.submitAnswer();
-};
+function hide() {
+  process.stdout.write('\u001b[?25l');
+}
 
 /**
  * Module exports
