@@ -30,15 +30,15 @@ Prompt.extend(Checkbox);
 Checkbox.prototype.initCheckbox = function() {
   this.checked = [];
   this.position = 0;
-
   if (this.question.hasDefault) {
     this.choices.enable(this.question.default);
   }
-
   this.question.default = null;
-  if (this.options.radio === true && !this.choices.getChoice('all')) {
-    var choices = ['all', 'none', this.choices.separator()].concat(this.choices.original);
-    this.choices = new this.question.Choices(choices);
+  if (this.choices.keys.length < 2) {
+    this.options.radio = false;
+  }
+  if (this.options.radio) {
+    createRadioOptions.call(this);
   }
 };
 
@@ -53,6 +53,7 @@ Checkbox.prototype.ask = function(cb) {
 
   this.ui.once('error', this.onError.bind(this));
   this.only('line', this.onSubmit.bind(this));
+
   this.only('keypress', function(event) {
     if (event.key.name === 'number') {
       this.onNumberKey(event);
@@ -146,27 +147,92 @@ Checkbox.prototype.getSelected = function() {
  */
 
 Checkbox.prototype.radio = function() {
-  if (this.options.radio === true) {
+  if (this.options.radio) {
     var choice = this.choices.getChoice(this.position);
-    if (choice.name === 'all' || choice.name === 'none') {
+    var keys = this.radioKeys;
+    var name = choice.name;
+
+    if (name === 'all' || name === 'none') {
       this.choices.toggle(this.position, true);
 
-      if (choice.name === 'all') {
-        this.choices.forEach(function(choice) {
-          if (choice.name !== 'all' && choice.name !== 'none') {
-            choice.checked = true;
+      if (name === 'all') {
+        this.choices.forEach(function(c) {
+          if (c.name !== 'all' && c.name !== 'none') {
+            c.checked = true;
           }
         });
       }
 
+    } else if (keys.indexOf(name) !== -1) {
+      this.choices.toggle(this.position);
+      var checked = keys.filter(function(key) {
+        return this.choices.getChoice(key).checked;
+      }, this);
+
+      this.choices.forEach(function(c) {
+        if (checked.indexOf(c.type) !== -1 || checked.indexOf(c.name) !== -1) {
+          c.checked = true;
+        } else {
+          c.checked = false;
+        }
+      });
+
     } else {
-      this.choices.disable(['all', 'none']);
+      this.choices.disable(['all', 'none'].concat(keys));
       this.choices.toggle(this.position);
     }
+
   } else {
     this.choices.toggle(this.position);
   }
 };
+
+function createRadioOptions() {
+  this.radioKeys = [];
+  var choices = ['all'];
+  var orig = this.choices.original;
+  var groups = [];
+
+  if (Array.isArray(this.options.radio)) {
+    var keys = this.options.radio.slice();
+    for (var i = 0; i < keys.length; i++) {
+      var key = keys[i];
+      var heading = false;
+      var len = orig.length;
+      var idx = -1;
+      while (++idx < len) {
+        var ele = orig[idx];
+        if (typeof ele === 'string') {
+          throw new TypeError('expected choice to be an object');
+        }
+
+        if (ele.type === key) {
+          if (heading === false) {
+            heading = true;
+            this.radioKeys.push(key);
+            choices.push(key);
+            groups.push(this.choices.separator(log.underline(log.cyan(key))));
+          }
+          groups.push(ele);
+        }
+      }
+
+      if (heading === false) {
+        choices = choices.filter(function(name) {
+          return name !== key;
+        });
+      }
+    }
+
+    choices.push('none');
+  } else {
+    groups = orig;
+    choices.push('none', this.choices.separator());
+  }
+
+  choices = choices.concat(groups);
+  this.choices = new this.question.Choices(choices, this.options);
+}
 
 /**
  * Hide/show cursor
