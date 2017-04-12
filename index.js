@@ -139,7 +139,9 @@ Checkbox.prototype.onSubmit = function() {
  */
 
 Checkbox.prototype.getSelected = function() {
-  return this.choices.checked;
+  return this.choices.checked.filter(function(ele) {
+    return ele !== 'all' && ele !== 'none';
+  });
 };
 
 /**
