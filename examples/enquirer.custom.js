@@ -1,11 +1,13 @@
-var radio = require('radio-symbol');
 var Enquirer = require('enquirer');
+var radio = require('radio-symbol');
 var enquirer = new Enquirer();
 
 enquirer.register('checkbox', require('..'));
 enquirer.question('colors', 'What are your favorite colors?', {
   type: 'checkbox',
+  default: 'red',
   checkbox: radio.star,
+  pointer: '♥',
   choices: [
     'red',
     'blue',
@@ -13,7 +15,7 @@ enquirer.question('colors', 'What are your favorite colors?', {
   ]
 });
 
-enquirer.prompt('colors')
+enquirer.ask('colors')
   .then(function(answers) {
     console.log(answers)
   })
