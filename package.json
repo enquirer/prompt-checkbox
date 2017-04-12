@@ -4,6 +4,10 @@
   "version": "0.4.2",
   "homepage": "https://github.com/enquirer/prompt-checkbox",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "contributors": [
+    "Brian Woodward <brian.woodward@gmail.com> (https://twitter.com/doowb)",
+    "Jon Schlinkert <jon.schlinkert@sellside.com> (http://twitter.com/jonschlinkert)"
+  ],
   "repository": "enquirer/prompt-checkbox",
   "bugs": {
     "url": "https://github.com/enquirer/prompt-checkbox/issues"
@@ -20,14 +24,14 @@
     "test": "mocha"
   },
   "dependencies": {
-    "debug": "^2.3.3",
+    "debug": "^2.6.3",
     "log-utils": "^0.2.1",
-    "prompt-base": "^0.5.0"
+    "prompt-base": "^0.6.0"
   },
   "devDependencies": {
-    "enquirer": "^0.3.0",
-    "gulp-format-md": "^0.1.11",
-    "prompt-question": "^0.4.0",
+    "enquirer": "^0.4.1",
+    "gulp-format-md": "^0.1.12",
+    "prompt-question": "^0.5.0",
     "radio-symbol": "^0.2.1"
   },
   "keywords": [
