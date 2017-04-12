@@ -26,7 +26,7 @@
   "dependencies": {
     "debug": "^2.6.3",
     "log-utils": "^0.2.1",
-    "prompt-base": "^0.6.0"
+    "prompt-base": "^0.6.1"
   },
   "devDependencies": {
     "enquirer": "^0.4.1",
