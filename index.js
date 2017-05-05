@@ -1,6 +1,7 @@
 'use strict';
 
 var debug = require('debug')('prompt-checkbox');
+var utils = require('readline-utils');
 var Prompt = require('prompt-base');
 var log = require('log-utils');
 
@@ -48,8 +49,9 @@ Checkbox.prototype.initCheckbox = function() {
  * @return {Object} Returns the `Checkbox` instance
  */
 
-Checkbox.prototype.ask = function(cb) {
-  this.callback = cb;
+Checkbox.prototype.ask = function(callback) {
+  this.resume();
+  this.callback = callback;
 
   this.ui.once('error', this.onError.bind(this));
   this.only('line', this.onSubmit.bind(this));
@@ -67,7 +69,8 @@ Checkbox.prototype.ask = function(cb) {
   }.bind(this));
 
   // Initialize prompt
-  hide();
+  utils.cursorHide(this.rl);
+  this.emit('ask', this);
   this.render();
   return this;
 };
@@ -125,9 +128,12 @@ Checkbox.prototype.onSpaceKey = function() {
  */
 
 Checkbox.prototype.onSubmit = function() {
+  var self = this;
   this.answer = this.getSelected();
   this.status = 'answered';
-  this.once('answer', show);
+  this.once('answer', function() {
+    utils.showCursor(self.rl);
+  });
 
   // removes listeners
   this.only();
@@ -234,18 +240,6 @@ function createRadioOptions() {
 
   choices = choices.concat(groups);
   this.choices = new this.question.Choices(choices, this.options);
-}
-
-/**
- * Hide/show cursor
- */
-
-function show() {
-  process.stdout.write('\u001b[?25h');
-}
-
-function hide() {
-  process.stdout.write('\u001b[?25l');
 }
 
 /**
