@@ -5,7 +5,7 @@ enquirer.register('checkbox', require('..'));
 enquirer.question('colors', 'What are your favorite colors?', {
   type: 'checkbox',
   default: 'red',
-  pointer: '♥♥♥',
+  prefix: '❤ ',
   choices: [
     'red',
     'blue',
