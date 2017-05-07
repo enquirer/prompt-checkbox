@@ -2,6 +2,7 @@
 
 require('mocha');
 var assert = require('assert');
+var answer = require('prompt-answer');
 var Prompt = require('./');
 
 describe('prompt-checkbox', function() {
@@ -15,43 +16,64 @@ describe('prompt-checkbox', function() {
     }, /question/i);
   });
 
-  it('should return an answers object on run', function(cb) {
+  it('should accept a number keypress on run', function(cb) {
     var prompt = new Prompt({
       name: 'color',
       message: 'What colors do you like?',
       choices: ['red', 'green', 'blue']
     });
 
-    prompt.on('ask', function() {
-      setImmediate(function() {
-        prompt.onNumberKey({value: 1});
-        prompt.rl.write('\n');
-      });
-    });
+    answer(prompt, 2);
 
     prompt.run()
       .then(function(answer) {
-        assert.deepEqual(answer, ['red']);
+        assert.deepEqual(answer, ['green']);
         cb();
       })
   });
 
-  it('should return an answers object on ask', function(cb) {
+  it('should accept an array of number keypresses on run', function(cb) {
     var prompt = new Prompt({
       name: 'color',
       message: 'What colors do you like?',
       choices: ['red', 'green', 'blue']
     });
 
-    prompt.on('ask', function() {
-      setImmediate(function() {
-        prompt.onNumberKey({value: 1});
-        prompt.rl.write('\n');
-      });
+    answer(prompt, [1, 2]);
+
+    prompt.run()
+      .then(function(answer) {
+        assert.deepEqual(answer, ['red', 'green']);
+        cb();
+      })
+  });
+
+  it('should accept a number keypress on ask', function(cb) {
+    var prompt = new Prompt({
+      name: 'color',
+      message: 'What colors do you like?',
+      choices: ['red', 'green', 'blue']
     });
 
+    answer(prompt, 2);
+
     prompt.ask(function(answer) {
-      assert.deepEqual(answer, ['red']);
+      assert.deepEqual(answer, ['green']);
+      cb();
+    });
+  });
+
+  it('should accept an array of number keypresses on ask', function(cb) {
+    var prompt = new Prompt({
+      name: 'color',
+      message: 'What colors do you like?',
+      choices: ['red', 'green', 'blue']
+    });
+
+    answer(prompt, [1, 2]);
+
+    prompt.ask(function(answer) {
+      assert.deepEqual(answer, ['red', 'green']);
       cb();
     });
   });

@@ -26,15 +26,16 @@
   "dependencies": {
     "debug": "^2.6.6",
     "log-utils": "^0.2.1",
-    "prompt-base": "^0.6.2",
-    "readline-utils": "^0.1.5"
+    "prompt-base": "^0.7.1",
+    "readline-utils": "^1.0.0"
   },
   "devDependencies": {
     "enquirer": "^0.4.1",
     "gulp-format-md": "^0.1.12",
     "mocha": "^3.3.0",
+    "prompt-answer": "^1.0.2",
     "prompt-question": "^1.0.0",
-    "radio-symbol": "^0.2.3"
+    "radio-symbol": "^1.0.3"
   },
   "keywords": [
     "answer",
