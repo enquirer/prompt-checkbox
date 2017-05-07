@@ -15,6 +15,7 @@ function Checkbox(/*question, answers, ui*/) {
   if (!this.choices) {
     throw new TypeError('expected "options.choices" to be an object or array');
   }
+  this.originalDefault = this.question.default;
   this.initCheckbox();
 }
 
@@ -33,8 +34,8 @@ Checkbox.prototype.initCheckbox = function() {
   this.position = 0;
   if (this.question.hasDefault) {
     this.choices.enable(this.question.default);
+    this.question.default = null;
   }
-  this.question.default = null;
   if (this.choices.keys.length < 2) {
     this.options.radio = false;
   }
@@ -50,8 +51,8 @@ Checkbox.prototype.initCheckbox = function() {
  */
 
 Checkbox.prototype.ask = function(callback) {
-  this.resume();
   this.callback = callback;
+  this.resume();
 
   this.ui.once('error', this.onError.bind(this));
   this.only('line', this.onSubmit.bind(this));
@@ -79,10 +80,8 @@ Checkbox.prototype.ask = function(callback) {
  * Render the prompt to the terminal
  */
 
-Checkbox.prototype.render = function(state) {
-  var append = typeof state === 'string'
-    ? log.red('>> ') + state
-    : '';
+Checkbox.prototype.render = function(err) {
+  var error = typeof err === 'string' ? log.red('>> ') + err : '';
 
   // render question
   var message = this.message;
@@ -97,7 +96,7 @@ Checkbox.prototype.render = function(state) {
     message += this.choices.render(this.position, {paginate: true});
   }
 
-  this.ui.render(message, append);
+  this.ui.render(message, error);
 };
 
 /**
