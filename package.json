@@ -35,7 +35,8 @@
     "mocha": "^3.3.0",
     "prompt-answer": "^1.0.2",
     "prompt-question": "^1.0.0",
-    "radio-symbol": "^1.0.3"
+    "radio-symbol": "^1.0.3",
+    "sinon": "^2.2.0"
   },
   "keywords": [
     "answer",
