@@ -1,6 +1,6 @@
 # prompt-checkbox [![NPM version](https://img.shields.io/npm/v/prompt-checkbox.svg?style=flat)](https://www.npmjs.com/package/prompt-checkbox) [![NPM monthly downloads](https://img.shields.io/npm/dm/prompt-checkbox.svg?style=flat)](https://npmjs.org/package/prompt-checkbox) [![NPM total downloads](https://img.shields.io/npm/dt/prompt-checkbox.svg?style=flat)](https://npmjs.org/package/prompt-checkbox) [![Linux Build Status](https://img.shields.io/travis/enquirer/prompt-checkbox.svg?style=flat&label=Travis)](https://travis-ci.org/enquirer/prompt-checkbox)
 
-> Multiple-choice/checkbox prompt. Can be used standalone or with a prompt system like [Enquirer].
+> Multiple-choice/checkbox prompt. Can be used standalone or with a prompt system like [Enquirer](https://github.com/enquirer/enquirer).
 
 ![prompt-checkbox example](https://raw.githubusercontent.com/enquirer/prompt-checkbox/master/example.gif)
 
@@ -15,19 +15,10 @@ $ npm install --save prompt-checkbox
 ## Usage
 
 ```js
-var Enquirer = require('enquirer');
-var enquirer = new Enquirer();
-
-enquirer.register('checkbox', require('prompt-checkbox'));
-```
-
-## Example
-
-```js
-var Question = require('prompt-question');
 var Prompt = require('prompt-checkbox');
-var question = new Question('colors', 'What are your favorite colors?', {
-  type: 'checkbox',
+var prompt = new Prompt({
+  name: 'colors',
+  message: 'What are your favorite colors?',
   choices: [
     'red',
     'blue',
@@ -35,7 +26,7 @@ var question = new Question('colors', 'What are your favorite colors?', {
   ]
 });
 
-var prompt = new Prompt(question);
+// promises
 prompt.run()
   .then(function(answers) {
     console.log(answers)
@@ -43,28 +34,78 @@ prompt.run()
   .catch(function(err) {
     console.log(err)
   })
+
+// async
+prompt.ask(function(answers) {
+  console.log(answers)
+});
 ```
 
-## Enquirer examples
+## options
 
-[Enquirer][] supports both the declarative inquirer-style question format and a functional format using the `.question` method:
+**options.radio**
 
-**Functional-style questions**
+Enable hybrid radio-checkbox support. Adds support for `all` and `none` radio options.
 
-Functional style questions.
+```js
+var Prompt = require('prompt-checkbox');
+var prompt = new Prompt({
+  name: 'colors',
+  message: 'What are your favorite colors?',
+  radio: true,
+  choices: [
+    'red',
+    'blue',
+    'yellow'
+  ]
+});
+```
+
+**options.objects**
+
+Return choices objects as the answer (instead of strings).
+
+```js
+var Prompt = require('prompt-checkbox');
+var prompt = new Prompt({
+  name: 'colors',
+  message: 'What are your favorite colors?',
+  objects: true,
+  choices: [
+    'red',
+    'blue',
+    'yellow'
+  ]
+});
+```
+
+## Usage with [enquirer](https://github.com/enquirer/enquirer)
+
+Register the prompt with enquirer:
 
 ```js
 var Enquirer = require('enquirer');
 var enquirer = new Enquirer();
 
 enquirer.register('checkbox', require('prompt-checkbox'));
+```
+
+### Enquirer examples
+
+[Enquirer](https://github.com/enquirer/enquirer) supports both the declarative inquirer-style question format and a functional format using the `.question` method:
+
+**Functional-style questions**
+
+Functional style questions.
+
+```js
 enquirer.question('color', 'What is your favorite color?', {
-  type: 'checkbox',
+  type: 'checkbox', //<= specify the prompt type
   default: 'blue',
   choices: ['red', 'yellow', 'blue']
 });
 
-enquirer.ask('color')
+enquirer.prompt('color')
   .then(function(answers) {
     console.log(answers)
   });
@@ -72,14 +113,9 @@ enquirer.ask('color')
 
 **Inquirer-style questions**
 
-Declarative questions format.
+Declarative questions format, similar to `inquirer`.
 
 ```js
-var Enquirer = require('enquirer');
-var enquirer = new Enquirer();
-
-enquirer.register('checkbox', require('prompt-checkbox'));
-
 var questions = [
   {
     name: 'color',
@@ -90,46 +126,19 @@ var questions = [
   }
 ];
 
-enquirer.ask(questions)
+enquirer.prompt(questions)
   .then(function(answers) {
     console.log(answers)
   });
 ```
-
-## options
-
-**options.radio**
-
-Enable hybrid radio-checkbox support. Adds support for `all` and `none` radio options (you need to add the options yourself).
-
-```js
-var Enquirer = require('enquirer');
-var enquirer = new Enquirer();
-
-enquirer.register('checkbox', require('prompt-checkbox'));
-enquirer.question('fruits', 'What fruits do you like?', {
-  type: 'checkbox',
-  choices: ['all', 'none', enquirer.separator(), 'watermelon', 'strawberry', 'apple'],
-  radio: true
-});
-
-enquirer.ask('fruits')
-  .then(function(answers) {
-    console.log(answers)
-  });
-```
-
-## Attribution
-
-Based on the `checkbox` prompt in inquirer.
 
 ## About
 
 ### Related projects
 
-* [enquirer-prompt](https://www.npmjs.com/package/enquirer-prompt): Base prompt module used for creating custom prompt types for Enquirer. | [homepage](https://github.com/jonschlinkert/enquirer-prompt "Base prompt module used for creating custom prompt types for Enquirer.")
-* [enquirer-question](https://www.npmjs.com/package/enquirer-question): Question object, used by Enquirer and prompt plugins. | [homepage](https://github.com/enquirer/enquirer-question "Question object, used by Enquirer and prompt plugins.")
 * [enquirer](https://www.npmjs.com/package/enquirer): Intuitive, plugin-based prompt system for node.js. Much faster and lighter alternative to Inquirer, with all… [more](https://github.com/enquirer/enquirer) | [homepage](https://github.com/enquirer/enquirer "Intuitive, plugin-based prompt system for node.js. Much faster and lighter alternative to Inquirer, with all the same prompt types and more, but without the bloat.")
+* [prompt-base](https://www.npmjs.com/package/prompt-base): Base prompt module used for creating custom prompt types for Enquirer. | [homepage](https://github.com/enquirer/prompt-base "Base prompt module used for creating custom prompt types for Enquirer.")
+* [prompt-question](https://www.npmjs.com/package/prompt-question): Question object, used by Enquirer and prompt plugins. | [homepage](https://github.com/enquirer/prompt-question "Question object, used by Enquirer and prompt plugins.")
 
 ### Contributing
 
@@ -157,4 +166,4 @@ Released under the [MIT License](LICENSE).
 
 ***
 
-_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on May 05, 2017._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on May 13, 2017._
