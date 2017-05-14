@@ -54,6 +54,6 @@ module.exports = {
   editor: {
     message: 'message',
     name: 'name',
-    default: 'Inquirer'
+    default: 'foo'
   }
 };

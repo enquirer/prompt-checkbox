@@ -1,8 +1,10 @@
-var Question = require('prompt-question');
+'use strict';
+
 var Prompt = require('..');
-var question = new Question('colors', 'What are your favorite colors?', {
-  type: 'checkbox',
-  pointer: '♥♥♥',
+var prompt = new Prompt({
+  name: 'colors',
+  message: 'What are your favorite colors?',
+  radio: true,
   choices: [
     'red',
     'blue',
@@ -10,7 +12,6 @@ var question = new Question('colors', 'What are your favorite colors?', {
   ]
 });
 
-var prompt = new Prompt(question);
 prompt.run()
   .then(function(answers) {
     console.log(arguments)
