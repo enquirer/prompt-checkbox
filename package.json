@@ -25,20 +25,21 @@
   },
   "dependencies": {
     "ansi-cyan": "^0.1.1",
-    "ansi-red": "^0.1.1",
-    "debug": "^2.6.6",
-    "prompt-base": "^0.8.2"
+    "debug": "^2.6.8",
+    "prompt-base": "^1.0.1"
   },
   "devDependencies": {
+    "ansi-magenta": "^0.1.1",
+    "clone-deep": "^0.3.0",
     "enquirer": "^0.4.1",
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
     "gulp-format-md": "^0.1.12",
     "gulp-istanbul": "^1.1.1",
     "gulp-mocha": "^3.0.1",
-    "mocha": "^3.3.0",
-    "prompt-question": "^2.0.1",
-    "radio-symbol": "^1.0.3"
+    "mocha": "^3.4.1",
+    "prompt-question": "^3.0.0",
+    "radio-symbol": "^2.0.0"
   },
   "keywords": [
     "answer",
@@ -85,11 +86,16 @@
       "list": [
         "enquirer",
         "prompt-base",
+        "prompt-choices",
         "prompt-question"
       ]
     },
     "lint": {
       "reflinks": true
-    }
+    },
+    "reflinks": [
+      "enquirer",
+      "prompt-base"
+    ]
   }
 }
