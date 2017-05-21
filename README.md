@@ -2,7 +2,7 @@
 
 > Multiple-choice/checkbox prompt. Can be used standalone or with a prompt system like [Enquirer](https://github.com/enquirer/enquirer).
 
-![prompt-checkbox example](https://raw.githubusercontent.com/enquirer/prompt-checkbox/master/example.gif)
+![prompt-checkbox example](https://raw.githubusercontent.com/enquirer/prompt-checkbox/master/docs/example.gif)
 
 ## Install
 
@@ -10,6 +10,71 @@ Install with [npm](https://www.npmjs.com/):
 
 ```sh
 $ npm install --save prompt-checkbox
+```
+
+## Special features
+
+Features you won't find with other prompts!
+
+### Choice groups
+
+![Choices groups](docs/choice-groups.gif)
+
+**Easy to configure!**
+
+Just pass an object of arrays on `choices`, and each key in the object will be used as the group "toggle":
+
+```js
+var Prompt = require('prompt-checkbox');
+var prompt = new Prompt({
+  name: 'install',
+  message: 'Which packages do you want to install?',
+  choices: {
+    dependencies: ['generate', 'micromatch'],
+    devDependencies: ['mocha', 'kind-of']
+  }
+});
+```
+
+### Radio choices
+
+Adds `all` and `none` choices, which select or deselect all choices, respectively. Named "radio choices" since it acts like a hybrid between checkboxes and radio buttons.
+
+<br>
+
+![radio choices](docs/radio-choices.gif)
+
+**Code example**
+
+```js
+var Prompt = require('prompt-checkbox');
+var prompt = new Prompt({
+  name: 'install',
+  message: 'Which packages do you want to install?',
+  radio: true,
+  choices: ['foo', 'bar', 'baz']
+});
+```
+
+### Radio groups
+
+Use "radio" choices with choice groups.
+
+<br>
+
+![radio choices](docs/radio-choices.gif)
+
+```js
+var Prompt = require('prompt-checkbox');
+var prompt = new Prompt({
+  name: 'install',
+  message: 'Which packages do you want to install?',
+  radio: true,
+  choices: {
+    dependencies: ['generate', 'micromatch'],
+    devDependencies: ['mocha', 'kind-of']
+  }
+});
 ```
 
 ## Usage
@@ -43,9 +108,47 @@ prompt.ask(function(answers) {
 
 ## options
 
-**options.radio**
+The following options are either specific to prompt-checkbox, or have behavior that differs in some way from the built-in options from [prompt-base](https://github.com/enquirer/prompt-base). _(Any other options from [prompt-base](https://github.com/enquirer/prompt-base) may be used as well.)_
 
-Enable hybrid radio-checkbox support. Adds support for `all` and `none` radio options.
+### options.default
+
+**Type**: `string|number|array`
+
+**Default**: `undefined`
+
+Specify the "default" choices to check when the prompt is initialized. Default can be a choice name (string), index (number), or an array of choice names or indices.
+
+**Examples**
+
+Specify default as a string (choice name):
+
+```js
+var prompt = new Prompt({
+  name: 'colors',
+  message: 'Best flavor?',
+  default: 'chocolate',
+  choices: ['chocolate'] // <= hmm, I wonder what they'll choose?
+});
+```
+
+Specify an array of defaults (choice names or indices):
+
+```js
+var prompt = new Prompt({
+  name: 'colors',
+  message: 'Favorite colors?',
+  default: [1, 'blue'],
+  choices: ['red', 'blue', 'yellow']
+});
+```
+
+### options.radio
+
+**Type**: `boolean`
+
+**Default**: `undefined`
+
+Enable hybrid radio-checkbox support, which adds `all` and `none` radio options for toggling all options on and off.
 
 ```js
 var Prompt = require('prompt-checkbox');
@@ -61,23 +164,42 @@ var prompt = new Prompt({
 });
 ```
 
-**options.objects**
+### options.transform
 
-Return choices objects as the answer (instead of strings).
+**Type**: `function`
+
+**Default**: `undefined`
+
+Modify answer values before they're returned.
+
+**Example**
+
+Use `options.transform` and the `prompt.choices.get()` method to convert answers (checked choices) to an array of objects (versus of an array of strings).
 
 ```js
 var Prompt = require('prompt-checkbox');
 var prompt = new Prompt({
   name: 'colors',
   message: 'What are your favorite colors?',
-  objects: true,
-  choices: [
-    'red',
-    'blue',
-    'yellow'
-  ]
+  choices: ['red', 'blue', 'yellow'],
+  transform: function(answer) {
+    // - "this" is the prompt instance
+    // - "this.choices.get()" returns the choice object for each choice
+    return answer ? answer.map(this.choices.get.bind(this.choices)) : [];
+  }
 });
 ```
+
+## Keypresses
+
+In addition to the keypresses that are supported by [prompt-base](https://github.com/enquirer/prompt-base), the following keypress offer different behavior that is specific to checklists:
+
+* <kbd>down</kbd> - move the pointer (cursor) down one row for each keypress
+* <kbd>up</kbd> - move the pointer (cursor) up one row for each keypress
+* <kbd>i</kbd> - toggle all choices to the opposite of their current state.
+* <kbd>a</kbd> - enable or disable all choices
+* <kbd>space</kbd> - toggle a choice
+* <kbd>number</kbd> - toggle the choice at the given index (starting at 1)
 
 ## Usage with [enquirer](https://github.com/enquirer/enquirer)
 
@@ -92,24 +214,10 @@ enquirer.register('checkbox', require('prompt-checkbox'));
 
 ### Enquirer examples
 
-[Enquirer](https://github.com/enquirer/enquirer) supports both the declarative inquirer-style question format and a functional format using the `.question` method:
+For formatting questions, [enquirer](https://github.com/enquirer/enquirer) supports either:
 
-**Functional-style questions**
-
-Functional style questions.
-
-```js
-enquirer.question('color', 'What is your favorite color?', {
-  type: 'checkbox', //<= specify the prompt type
-  default: 'blue',
-  choices: ['red', 'yellow', 'blue']
-});
-
-enquirer.prompt('color')
-  .then(function(answers) {
-    console.log(answers)
-  });
-```
+* declarative, inquirer-style question format
+* functional format using the `.question` method.
 
 **Inquirer-style questions**
 
@@ -132,12 +240,51 @@ enquirer.prompt(questions)
   });
 ```
 
+Or:
+
+```js
+enquirer.prompt({
+    name: 'color',
+    message: 'What is your favorite color?',
+    type: 'checkbox',
+    default: 'blue',
+    choices: ['red', 'yellow', 'blue']
+  })
+  .then(function(answers) {
+    console.log(answers)
+  });
+```
+
+**Functional-style questions**
+
+Use the `.question` method to pre-register questions, so they can be called later. Also, the `message` may be passed as the second argument, or as a property on the question options.
+
+```js
+enquirer.question('letter', 'What are your favorite letters?', {
+  type: 'checkbox', //<= specify the prompt type
+  choices: ['a', 'b', 'c']
+});
+
+enquirer.question('numbers', {
+  type: 'checkbox', //<= specify the prompt type
+  message: 'What are your favorite numbers?',
+  choices: ['1', '2', '3']
+});
+
+// pass the name(s) or questions to ask
+enquirer.prompt(['letters', 'numbers'])
+  .then(function(answers) {
+    console.log(answers)
+  });
+```
+
 ## About
 
 ### Related projects
 
 * [enquirer](https://www.npmjs.com/package/enquirer): Intuitive, plugin-based prompt system for node.js. Much faster and lighter alternative to Inquirer, with all… [more](https://github.com/enquirer/enquirer) | [homepage](https://github.com/enquirer/enquirer "Intuitive, plugin-based prompt system for node.js. Much faster and lighter alternative to Inquirer, with all the same prompt types and more, but without the bloat.")
 * [prompt-base](https://www.npmjs.com/package/prompt-base): Base prompt module used for creating custom prompt types for Enquirer. | [homepage](https://github.com/enquirer/prompt-base "Base prompt module used for creating custom prompt types for Enquirer.")
+* [prompt-choices](https://www.npmjs.com/package/prompt-choices): Create an array of multiple choice objects for use in prompts. | [homepage](https://github.com/enquirer/prompt-choices "Create an array of multiple choice objects for use in prompts.")
 * [prompt-question](https://www.npmjs.com/package/prompt-question): Question object, used by Enquirer and prompt plugins. | [homepage](https://github.com/enquirer/prompt-question "Question object, used by Enquirer and prompt plugins.")
 
 ### Contributing
@@ -166,4 +313,4 @@ Released under the [MIT License](LICENSE).
 
 ***
 
-_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on May 13, 2017._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on May 21, 2017._
