@@ -8,7 +8,7 @@ var unmute;
 
 describe('prompt-checkbox', function() {
   beforeEach(function() {
-    prompt = new Prompt({name: 'fixture', radio: true});
+    prompt = new Prompt({name: 'fixture', group: true});
     unmute = prompt.mute();
   });
 

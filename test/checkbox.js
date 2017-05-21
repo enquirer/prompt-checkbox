@@ -1,6 +1,5 @@
 'use strict';
 
-// var UI = require('readline-ui');
 var clone = require('clone-deep');
 var assert = require('assert');
 var fixtures = require('./fixtures');
@@ -229,25 +228,18 @@ describe('prompt-checkbox', function() {
 
   describe('with disabled choices', function() {
     beforeEach(function() {
-      fixture.choices.push({
-        name: 'dis1',
-        disabled: true
-      });
-
-      fixture.choices.push({
-        name: 'dis2',
-        disabled: 'uh oh'
-      });
-
       prompt = new Prompt(fixture);
     });
 
     it('should output disabled choices and custom messages', function() {
+      prompt.choices.addChoice({name: 'dis1', disabled: true});
+      prompt.choices.addChoice({name: 'dis2', disabled: 'uh oh'});
+
       var dis1 = last(prompt.choices.choices, 2);
       var dis2 = last(prompt.choices.choices, 1);
 
-      assert.equal(dis1.line, ' \u001b[90mⓧ\u001b[39m \u001b[2mdis1 (Disabled)\u001b[22m\n');
-      assert.equal(dis2.line, ' \u001b[90mⓧ\u001b[39m \u001b[2mdis2 (uh oh)\u001b[22m\n');
+      assert.equal(dis1.line, ' \u001b[90mⒾ\u001b[39m \u001b[2mdis1 (Disabled)\u001b[22m\n');
+      assert.equal(dis2.line, ' \u001b[90mⒾ\u001b[39m \u001b[2mdis2 (uh oh)\u001b[22m\n');
     });
 
     it('skip disabled choices', function(cb) {
@@ -261,7 +253,6 @@ describe('prompt-checkbox', function() {
         prompt.rl.input.emit('keypress', null, {name: 'down'});
         prompt.rl.input.emit('keypress', null, {name: 'down'});
         prompt.rl.input.emit('keypress', null, {name: 'down'});
-
         prompt.rl.input.emit('keypress', ' ', {name: 'space'});
         prompt.rl.emit('line');
       });

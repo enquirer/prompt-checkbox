@@ -61,26 +61,6 @@ describe('.run', function() {
     prompt.rl.emit('line');
   });
 
-  it('should return choice objects when options.objects is true', function(cb) {
-    prompt.choices = ['red', 'green', 'blue'];
-    prompt.choices.options.objects = true;
-    prompt.choices.toggle();
-
-    prompt.run()
-      .then(function(answer) {
-        assert(Array.isArray(answer));
-        assert.deepEqual(answer, [
-          { name: 'red', short: 'red', value: 'red', checked: true },
-          { name: 'green', short: 'green', value: 'green', checked: true },
-          { name: 'blue', short: 'blue', value: 'blue', checked: true }
-        ]);
-        cb();
-      })
-      .catch(cb);
-
-    prompt.rl.emit('line');
-  });
-
   it('should validate choices', function(cb) {
     prompt.choices = ['red', 'green', 'blue'];
     prompt.question.validate = function() {

@@ -28,7 +28,7 @@ describe('.ask', function() {
     prompt.rl.emit('line');
   });
 
-  it('should select multiple choices directly', function(cb) {
+  it('should select multiple choices using the .check method', function(cb) {
     prompt.choices = ['red', 'green', 'blue'];
 
     prompt.ask(function(answer) {
@@ -40,12 +40,28 @@ describe('.ask', function() {
     prompt.rl.emit('line');
   });
 
+  it('should select a choice that is defined as "checked"', function(cb) {
+    prompt.choices = ['red', 'green', 'blue', {name: 'yellow', checked: true }];
+
+    prompt.ask(function(answer) {
+      assert.deepEqual(answer, ['yellow']);
+      cb();
+    });
+
+    prompt.rl.emit('line');
+  });
+
   it('should select a choice with a "number" keypress event', function(cb) {
     prompt.choices = ['red', 'green', 'blue'];
+    var dispatch = [];
     var events = [];
 
     prompt.only('keypress', function(name) {
       events.push(name);
+    });
+
+    prompt.on('dispatch', function(name) {
+      dispatch.push(name);
     });
 
     prompt.ask(function(answer) {
