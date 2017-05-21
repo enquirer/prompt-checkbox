@@ -2,14 +2,11 @@ var Prompt = require('..');
 var prompt = new Prompt({
   name: 'colors',
   message: 'What are your favorite colors?',
-  radio: true,
+  default: 1,
   choices: [
     'red',
     'blue',
-    'yellow',
-    'magenta',
-    'green',
-    'cyan'
+    'yellow'
   ]
 });
 

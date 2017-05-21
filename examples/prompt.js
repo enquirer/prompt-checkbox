@@ -5,7 +5,9 @@ var question = new Question('colors', 'What are your favorite colors?', {
   choices: [
     'red',
     'blue',
-    'yellow'
+    'yellow',
+    'green',
+    'magenta'
   ]
 });
 

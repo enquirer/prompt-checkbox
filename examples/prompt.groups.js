@@ -1,21 +1,18 @@
+var answers = {};
 var Prompt = require('..');
 var prompt = new Prompt({
   name: 'colors',
   message: 'What are your favorite colors?',
   radio: true,
-  choices: [
-    'red',
-    'blue',
-    'yellow',
-    'magenta',
-    'green',
-    'cyan'
-  ]
+  choices: {
+    foo: ['a', 'b', 'c'],
+    bar: ['d', 'e', 'f']
+  }
 });
 
-prompt.run()
-  .then(function(answers) {
-    console.log(arguments)
+prompt.run(answers)
+  .then(function(answer) {
+    console.log(answer)
   })
   .catch(function(err) {
     console.log(err)
