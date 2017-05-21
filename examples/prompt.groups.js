@@ -3,7 +3,6 @@ var Prompt = require('..');
 var prompt = new Prompt({
   name: 'colors',
   message: 'What are your favorite colors?',
-  radio: true,
   choices: {
     foo: ['a', 'b', 'c'],
     bar: ['d', 'e', 'f']
