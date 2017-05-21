@@ -62,7 +62,7 @@ Use "radio" choices with choice groups.
 
 <br>
 
-![radio choices](docs/radio-choices.gif)
+![radio groups](docs/radio-groups.gif)
 
 ```js
 var Prompt = require('prompt-checkbox');
