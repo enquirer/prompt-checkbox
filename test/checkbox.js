@@ -13,7 +13,7 @@ function last(arr, n) {
   return arr[arr.length - (n || 1)];
 }
 
-describe('prompt-checkbox', function() {
+describe('checkbox', function() {
   beforeEach(function() {
     fixture = clone(fixtures.checkbox);
     prompt = new Prompt(fixture);
@@ -31,7 +31,8 @@ describe('prompt-checkbox', function() {
         assert.equal(answer.length, 1);
         assert.equal(answer[0], 'choice 1');
         cb();
-      });
+      })
+      .catch(cb);
 
     setImmediate(function() {
       prompt.rl.input.emit('keypress', ' ', {name: 'space'});
@@ -47,7 +48,8 @@ describe('prompt-checkbox', function() {
         assert.equal(answer[0], 'choice 1');
         assert.equal(answer[1], 'choice 2');
         cb();
-      });
+      })
+      .catch(cb);
 
     setImmediate(function() {
       prompt.rl.input.emit('keypress', ' ', {name: 'space'});
@@ -70,7 +72,8 @@ describe('prompt-checkbox', function() {
         assert.equal(answer.length, 1);
         assert.equal(answer[0], '1');
         cb();
-      });
+      })
+      .catch(cb);
 
     setImmediate(function() {
       prompt.rl.emit('line');
@@ -112,7 +115,8 @@ describe('prompt-checkbox', function() {
         assert.equal(answer[0], '1');
         assert.equal(answer[1], '3');
         cb();
-      });
+      })
+      .catch(cb);
 
     setImmediate(function() {
       prompt.rl.emit('line');
@@ -126,6 +130,7 @@ describe('prompt-checkbox', function() {
         assert.equal(answer[0], 'choice 1');
         cb();
       });
+      .catch(cb);
 
     setImmediate(function() {
       prompt.rl.input.emit('keypress', ' ', {name: 'space'});
@@ -142,7 +147,8 @@ describe('prompt-checkbox', function() {
         assert.equal(answer.length, 1);
         assert.equal(answer[0], 'choice 2');
         cb();
-      });
+      })
+      .catch(cb);
 
     setImmediate(function() {
       prompt.rl.input.emit('keypress', null, {name: 'down'});
@@ -160,7 +166,8 @@ describe('prompt-checkbox', function() {
         assert.equal(answer.length, 1);
         assert.equal(answer[0], 'choice 2');
         cb();
-      });
+      })
+      .catch(cb);
 
     setImmediate(function() {
       prompt.rl.input.emit('keypress', 'n', {name: 'n', ctrl: true});
@@ -172,13 +179,14 @@ describe('prompt-checkbox', function() {
     });
   });
 
-  it('should support 1-9 shortcut key', function(cb) {
+  it('should support 1-9 shortcut keypresses', function(cb) {
     prompt.run()
       .then(function(answer) {
         assert.equal(answer.length, 1);
         assert.equal(answer[0], 'choice 2');
         cb();
-      });
+      })
+      .catch(cb);
 
     setImmediate(function() {
       prompt.rl.input.emit('keypress', '2');
@@ -247,7 +255,8 @@ describe('prompt-checkbox', function() {
         .then(function(answer) {
           assert.equal(answer[0], 'choice 1');
           cb();
-        });
+        })
+        .catch(cb);
 
       setImmediate(function() {
         prompt.rl.input.emit('keypress', null, {name: 'down'});
@@ -269,7 +278,8 @@ describe('prompt-checkbox', function() {
         .then(function(answer) {
           assert.equal(answer.length, 0);
           cb();
-        });
+        })
+        .catch(cb);
 
       setImmediate(function() {
         prompt.rl.emit('line');
@@ -291,7 +301,8 @@ describe('prompt-checkbox', function() {
         .then(function() {
           var dis1 = last(prompt.choices.choices);
           assert.equal(dis1.disabled, true);
-        });
+        })
+        .catch(cb);
 
       setImmediate(function() {
         prompt.rl.emit('line');

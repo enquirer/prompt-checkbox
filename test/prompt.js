@@ -6,7 +6,7 @@ var Prompt = require('..');
 var prompt;
 var unmute;
 
-describe('prompt-checkbox', function() {
+describe('prompt', function() {
   beforeEach(function() {
     prompt = new Prompt({name: 'fixture', group: true});
     unmute = prompt.mute();
