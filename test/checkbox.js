@@ -129,7 +129,7 @@ describe('checkbox', function() {
         assert.equal(answer.length, 1);
         assert.equal(answer[0], 'choice 1');
         cb();
-      });
+      })
       .catch(cb);
 
     setImmediate(function() {
@@ -286,7 +286,7 @@ describe('checkbox', function() {
       });
     });
 
-    it('should support disabled as a function', function() {
+    it('should support disabled as a function', function(cb) {
       fixture.choices = [
         {
           name: 'dis1',
@@ -301,6 +301,7 @@ describe('checkbox', function() {
         .then(function() {
           var dis1 = last(prompt.choices.choices);
           assert.equal(dis1.disabled, true);
+          cb();
         })
         .catch(cb);
 
