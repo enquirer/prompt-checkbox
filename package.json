@@ -1,7 +1,7 @@
 {
   "name": "prompt-checkbox",
   "description": "Multiple-choice/checkbox prompt. Can be used standalone or with a prompt system like [Enquirer].",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/enquirer/prompt-checkbox",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "contributors": [
@@ -26,20 +26,20 @@
   "dependencies": {
     "ansi-cyan": "^0.1.1",
     "debug": "^2.6.8",
-    "prompt-base": "^1.0.1"
+    "prompt-base": "^1.0.4"
   },
   "devDependencies": {
-    "ansi-magenta": "^0.1.1",
-    "clone-deep": "^0.3.0",
+    "radio-symbol": "^2.0.0",
     "enquirer": "^0.4.1",
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^3.0.1",
-    "gulp-format-md": "^0.1.12",
-    "gulp-istanbul": "^1.1.1",
-    "gulp-mocha": "^3.0.1",
-    "mocha": "^3.4.1",
     "prompt-question": "^3.0.0",
-    "radio-symbol": "^2.0.0"
+    "ansi-magenta": "^0.1.1",
+    "mocha": "^3.4.1",
+    "clone-deep": "^0.3.0",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-format-md": "^0.1.12"
   },
   "keywords": [
     "answer",
