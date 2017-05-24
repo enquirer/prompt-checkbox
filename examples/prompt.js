@@ -1,7 +1,8 @@
 var Question = require('prompt-question');
 var Prompt = require('..');
-var question = new Question('colors', 'What are your favorite colors?', {
+var question = new Question('colors', {
   type: 'checkbox',
+  message: 'What are your favorite colors?',
   choices: [
     'red',
     'blue',
