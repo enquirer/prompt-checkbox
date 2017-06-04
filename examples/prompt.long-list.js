@@ -4,6 +4,7 @@ var question = new Question('words', {
   type: 'checkbox',
   message: 'What choices do you want?',
   choices: [
+    'first',
     'foo',
     'bar',
     'baz',
@@ -17,7 +18,8 @@ var question = new Question('words', {
     'fff',
     'ggg',
     'hhh',
-    'iii'
+    'iii',
+    'last',
   ]
 });
 

@@ -1,11 +1,11 @@
+var colors = require('ansi-colors');
 var Enquirer = require('enquirer');
 var enquirer = new Enquirer();
 
 enquirer.register('checkbox', require('..'));
 enquirer.question('colors', 'What are your favorite colors?', {
   type: 'checkbox',
-  default: 'red',
-  pointer: '♥♥♥',
+  pointer: colors.magenta('♥♥♥'),
   choices: [
     'red',
     'blue',
