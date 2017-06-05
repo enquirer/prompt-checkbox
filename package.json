@@ -1,7 +1,7 @@
 {
   "name": "prompt-checkbox",
   "description": "Multiple-choice/checkbox prompt. Can be used standalone or with a prompt system like [Enquirer].",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "homepage": "https://github.com/enquirer/prompt-checkbox",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "contributors": [
