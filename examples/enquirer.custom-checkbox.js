@@ -1,4 +1,3 @@
-var colors = require('ansi-colors');
 var radio = require('radio-symbol');
 var Enquirer = require('enquirer');
 var enquirer = new Enquirer();
@@ -6,7 +5,7 @@ var enquirer = new Enquirer();
 enquirer.register('checkbox', require('..'));
 enquirer.question('colors', 'What are your favorite colors?', {
   type: 'checkbox',
-  symbol: colors.bold(colors.yellow(radio.star)),
+  checkbox: radio.star,
   choices: [
     'red',
     'blue',
