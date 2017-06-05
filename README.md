@@ -2,7 +2,7 @@
 
 > Multiple-choice/checkbox prompt. Can be used standalone or with a prompt system like [Enquirer](http://enquirer.io).
 
-![prompt-checkbox example](https://raw.githubusercontent.com/enquirer/prompt-checkbox/master/example.gif)
+![prompt-checkbox example](https://raw.githubusercontent.com/enquirer/prompt-checkbox/master/docs/example.gif)
 
 ## Install
 
@@ -18,7 +18,7 @@ Features you won't find with other prompts!
 
 ### Choice groups
 
-![Choices groups](docs/choice-groups.gif)
+![Choices groups](https://raw.githubusercontent.com/enquirer/prompt-checkbox/master/docs/choice-groups.gif)
 
 **Easy to configure!**
 
@@ -42,7 +42,7 @@ Adds `all` and `none` choices, which select or deselect all choices, respectivel
 
 <br>
 
-![radio choices](docs/radio-choices.gif)
+![radio choices](https://raw.githubusercontent.com/enquirer/prompt-checkbox/master/docs/radio-choices.gif)
 
 **Code example**
 
@@ -62,7 +62,7 @@ Use "radio" choices with choice groups.
 
 <br>
 
-![radio groups](docs/radio-groups.gif)
+![radio groups](https://raw.githubusercontent.com/enquirer/prompt-checkbox/master/docs/radio-groups.gif)
 
 ```js
 var Prompt = require('prompt-checkbox');
