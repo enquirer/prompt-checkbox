@@ -5,6 +5,7 @@ var prompt = new Prompt({
   name: 'colors',
   message: 'What are your favorite colors?',
   choices: function() {
+    console.log('should be second');
     return [
       {name: 'red', category: 'foo'},
       {name: 'blue', category: 'bar', disabled: true},
@@ -16,7 +17,7 @@ var prompt = new Prompt({
     ]
   }
 });
-
+console.log('should be first');
 prompt.run(answers)
   .then(function(answer) {
     console.log(answer)

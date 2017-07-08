@@ -11,7 +11,6 @@ var cyan = require('ansi-cyan');
 function Checkbox() {
   debug('initializing from <%s>', __filename);
   Prompt.apply(this, arguments);
-  this.choices.options.filterList = true;
   this.errorMessage = null;
   this.infoMessage = this.options.infoMessage || '(Press '
     + cyan('<space>')
@@ -29,6 +28,7 @@ Prompt.extend(Checkbox);
  */
 
 Checkbox.prototype.renderOutput = function() {
+  this.choices.options.filterList = true;
   return this.choices.render(this.position, this.question.options);
 };
 
