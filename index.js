@@ -12,7 +12,7 @@ function Checkbox() {
   debug('initializing from <%s>', __filename);
   Prompt.apply(this, arguments);
   this.errorMessage = null;
-  this.infoMessage = this.options.infoMessage || '(Press '
+  this.helpMessage = this.options.helpMessage || '(Press '
     + cyan('<space>')
     + ' to toggle)';
 }
