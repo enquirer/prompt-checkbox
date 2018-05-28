@@ -35,12 +35,14 @@ Checkbox.prototype.renderOutput = function() {
 /**
  * Render only the selected choices to the terminal
  */
-
 Checkbox.prototype.renderAnswer = function() {
-  var keys = this.choices.checked.map(function(choice) {
-    return typeof choice === 'string' ? choice : choice.value;
-  });
-  return cyan(keys.join(', '));
+  var answers = this.choices.checked.map(function(choice) {
+    if (typeof choice === 'string') {
+      return this.choices.get(choice, 'value') || choice;
+    }
+    return choice.value;
+  }, this);
+  return cyan(answers.join(', '));
 };
 
 /**
